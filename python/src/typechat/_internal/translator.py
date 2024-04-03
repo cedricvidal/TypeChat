@@ -73,11 +73,14 @@ class TypeChatJsonTranslator(Generic[T]):
 
         num_repairs_attempted = 0
         while True:
+            print("prompt", prompt)
             completion_response = await self.model.complete(prompt)
+            print("completion_response", completion_response)
             if isinstance(completion_response, Failure):
                 return completion_response
 
             text_response = completion_response.value
+            print("text_response", text_response)
             first_curly = text_response.find("{")
             last_curly = text_response.rfind("}") + 1
             error_message: str
